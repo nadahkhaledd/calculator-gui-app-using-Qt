@@ -1,9 +1,11 @@
 #!/usr/bin/pyton3
 
 import sys
+import math
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+
 
 class Button:
     def __init__(self, text, res):
@@ -14,10 +16,28 @@ class Button:
 
     def handleInput(self, v):
         current = self.res.text()
-        newResult = current + str(v)
-        self.res.setText(newResult)
+        if v == '=':
+            equals = eval(self.res.text())
+            self.res.setText(str(equals))
+
+        elif v == 'AC':
+            self.res.setText('')
+
+        elif v == '±':
+            if current[0] == '-':
+                newText = str(float(current) * -1)
+            else:
+                newText = '-' + current
+            self.res.setText(newText)
+
+        elif v == '%':
+            newText = float(current) / 100
+            self.res.setText(str(newText))
 
 
+        else:
+            newResult = current + str(v)
+            self.res.setText(newResult)
 
 
 class Application(QWidget):
@@ -28,7 +48,7 @@ class Application(QWidget):
 
     def createApp(self):
         grid = QGridLayout()
-        input = QLineEdit()
+        input = QLabel()
         # grid.addWidget(widget, row place, column place, how many rows it takes, how many columns it takes)
 
         buttons = ['AC', '±', '%', '÷',
@@ -49,7 +69,7 @@ class Application(QWidget):
 
             if button == 0:
                 grid.addWidget(buttonObj.b, row, column, 1, 2)
-                column+=1
+                column += 1
             else:
                 grid.addWidget(buttonObj.b, row, column, 1, 1)
 
