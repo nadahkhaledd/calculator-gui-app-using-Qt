@@ -34,7 +34,6 @@ class Button:
             newText = float(current) / 100
             self.res.setText(str(newText))
 
-
         else:
             newResult = current + str(v)
             self.res.setText(newResult)
@@ -51,8 +50,8 @@ class Application(QWidget):
         input = QLabel()
         # grid.addWidget(widget, row place, column place, how many rows it takes, how many columns it takes)
 
-        buttons = ['AC', '±', '%', '÷',
-                   7, 8, 9, '×',
+        buttons = ['AC', '±', '%', '/',
+                   7, 8, 9, '*',
                    4, 5, 6, '-',
                    1, 2, 3, '+',
                    0, '.', '=']
